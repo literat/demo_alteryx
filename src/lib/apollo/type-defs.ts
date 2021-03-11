@@ -5,7 +5,16 @@ export const typeDefs = gql`
     users: [User!]!
   }
 
+  scalar Time
+
   type User {
-    name: String
+    firstName: String!
+    lastName: String
+    email: String!
+    password: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    createdAt: Time!
+    updatedAt: Time!
   }
 `;
