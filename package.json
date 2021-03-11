@@ -3,5 +3,33 @@
   "version": "1.0.0",
   "repository": "git@github.com:literat/demo_alteryx.git",
   "author": "literat <tomas@litera.me>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.3.11",
+    "@apollo/react-hooks": "^4.0.0",
+    "@graphql-codegen/add": "^2.0.2",
+    "@svgr/webpack": "^5.5.0",
+    "apollo-boost": "^0.4.9",
+    "apollo-server-micro": "^2.21.1",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "nanoid": "^3.1.20",
+    "next": "^10.0.8",
+    "next-with-apollo": "^5.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.32.8"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.33",
+    "@types/react": "^17.0.3",
+    "typescript": "^4.2.3"
+  },
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start",
+    "types": "tsc -p ./tsconfig.json"
+  }
 }
