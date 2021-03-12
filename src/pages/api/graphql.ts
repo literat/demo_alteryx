@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { resolvers } from '../../lib/resolvers';
+import nextConnect from 'next-connect';
 import { typeDefs } from '../../lib/apollo/type-defs';
 import { db } from '../../lib/db';
 import useCookie from '../../lib/middleware/useCookie';
-import nextConnect from 'next-connect';
+import { resolvers } from '../../lib/resolvers';
 
 const context = (request) => ({ ...request, db });
 

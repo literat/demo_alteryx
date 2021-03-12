@@ -1,6 +1,6 @@
-import { createUser } from './../../fauna/queries/users';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { createUser } from '../../fauna/queries/users';
 
 export const signupMutation = async (parent, args, context, info) => {
   // lowercase their email
@@ -8,7 +8,7 @@ export const signupMutation = async (parent, args, context, info) => {
   // has their password
   const password = await bcrypt.hash(args.password, 10);
   // create the user in the database
-  const {firstName, lastName, email} = args;
+  const { firstName, lastName, email } = args;
 
   // @TODO: check valid email
   const user = await context.db.query(

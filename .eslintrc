@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "eslint-config-wesbos/typescript.js"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/prop-types": ["warn"],
+    "newline-before-return": ["error"]
+  },
+  "globals": {
+    "JSX": true
+  },
+}

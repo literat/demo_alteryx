@@ -1,15 +1,11 @@
 import { query as fql } from 'faunadb';
-import { findUserByEmail } from './../../fauna/queries/users';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
+import { findUserByEmail } from '../../fauna/queries/users';
 
 export const signinMutation = async (parent, { email, password }, context) => {
   // 1. Check if there is a user with that email
-  const user = await context.db.query(
-    findUserByEmail(email)
-  );
-
+  const user = await context.db.query(findUserByEmail(email));
 
   if (!user) {
     throw new Error(`No such user found for email ${email}`);
