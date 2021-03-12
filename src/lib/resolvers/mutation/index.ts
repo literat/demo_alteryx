@@ -1,7 +1,7 @@
-// import { signinMutation } from './signinMutation';
+import { signinMutation } from './signinMutation';
 import { signupMutation } from './signupMutation';
 
 export const Mutation = {
-  // signin: signinMutation,
+  signin: signinMutation,
   signup: signupMutation,
 };

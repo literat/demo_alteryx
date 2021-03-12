@@ -9,6 +9,10 @@ export const allUsers = () => Map(
   Lambda("X", Get(Var("X")))
 )
 
+export const findUserByEmail = (email) => Get(
+    Match(Index("user_by_email"), email)
+  )
+
 export const createUser = (firstName: string, lastName: string, email: string, password: string) => Create(
   Collection("users"),
   {
