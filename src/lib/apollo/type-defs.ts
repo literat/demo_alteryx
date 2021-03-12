@@ -18,6 +18,7 @@ export const typeDefs = gql`
     ): User!
     signin(email: String!, password: String!): User!
     signout: SuccesMessage!
+    removeUser(id: ID!): User!
   }
 
   scalar Time

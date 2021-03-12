@@ -3,8 +3,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { nanoid } from 'nanoid';
 import Error from './Error';
 import Loading from './Loading';
+import UserListItem from './UserListItem';
 
-const ALL_USERS_QUERY = gql`
+export const ALL_USERS_QUERY = gql`
   query ALL_USERS_QUERY {
     users {
       id
@@ -26,19 +27,7 @@ const Dashboard = (): JSX.Element => {
     return <Error error={error} />;
   }
 
-  return data.users.map((user) => (
-    <div>
-      <span key={nanoid()} style={{ padding: '5px' }}>
-        {user.firstName}
-      </span>
-      <span key={nanoid()} style={{ padding: '5px' }}>
-        {user.lastName}
-      </span>
-      <span key={nanoid()} style={{ padding: '5px' }}>
-        {user.email}
-      </span>
-    </div>
-  ));
+  return data.users.map((user) => <UserListItem user={user} key={nanoid()} />);
 };
 
 export default Dashboard;

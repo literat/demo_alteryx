@@ -12,6 +12,8 @@ const {
   Select,
   Create,
   Collection,
+  Delete,
+  Ref,
 } = fql;
 
 export const allUsers = () =>
@@ -50,3 +52,16 @@ export const createUser = (
       password,
     },
   });
+
+export const removeUser = (id: string) =>
+  Let(
+    {
+      data: Delete(Ref(Collection('users'), id)),
+    },
+    {
+      id: Select(['ref', 'id'], Var('data')),
+      firstName: Select(['data', 'firstName'], Var('data')),
+      lastName: Select(['data', 'lastName'], Var('data')),
+      email: Select(['data', 'email'], Var('data')),
+    }
+  );
