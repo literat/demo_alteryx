@@ -5,6 +5,10 @@ export const typeDefs = gql`
     users: [User!]!
   }
 
+  type Mutation {
+    signup(email: String!, password: String!, firstName: String!, lastName: String!): User!
+  }
+
   scalar Time
 
   type User {
