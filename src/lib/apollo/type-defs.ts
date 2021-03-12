@@ -5,9 +5,14 @@ export const typeDefs = gql`
     users: [User!]!
   }
 
+  type SuccesMessage {
+    message: String
+  }
+
   type Mutation {
     signup(email: String!, password: String!, firstName: String!, lastName: String!): User!
     signin(email: String!, password: String!): User!
+    signout: SuccesMessage!
   }
 
   scalar Time
