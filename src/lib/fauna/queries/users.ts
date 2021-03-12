@@ -1,12 +1,23 @@
 import { query as fql } from 'faunadb';
 
-const { Map, Paginate, Match, Index, Lambda, Get, Var, Create, Collection} = fql;
+const { Map, Paginate, Match, Index, Lambda, Get, Var, Let, Select, Create, Collection} = fql;
 
 export const allUsers = () => Map(
   Paginate(
     Match(Index("all_users"))
   ),
-  Lambda("X", Get(Var("X")))
+  Lambda("userRef", Let(
+      {
+        userDoc: Get(Var("userRef"))
+      },
+      {
+        id: Select(["ref", "id"], Var("userDoc")),
+        firstName: Select(["data", "firstName"], Var("userDoc")),
+        lastName: Select(["data", "lastName"], Var("userDoc")),
+        email: Select(["data", "email"], Var("userDoc")),
+      }
+    )
+  )
 )
 
 export const findUserByEmail = (email) => Get(

@@ -13,6 +13,7 @@ export const typeDefs = gql`
   scalar Time
 
   type User {
+    id: ID!
     firstName: String!
     lastName: String
     email: String!
