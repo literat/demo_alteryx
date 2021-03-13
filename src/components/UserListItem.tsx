@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import Link from 'next/link';
 import { User } from './User';
 import { ALL_USERS_QUERY } from './UserListing';
 
@@ -33,7 +34,11 @@ const UserListItem = ({ user }: UserListItemProps): JSX.Element => {
 
   return (
     <div>
-      <span style={{ padding: '5px' }}>{user.firstName}</span>
+      <Link href={`/users/${user.id}`}>
+        <a>
+          <span style={{ padding: '5px' }}>{user.firstName}</span>
+        </a>
+      </Link>
       <span style={{ padding: '5px' }}>{user.lastName}</span>
       <span style={{ padding: '5px' }}>{user.email}</span>
       <button type="button" style={{ padding: '5px' }} onClick={handleRemove}>

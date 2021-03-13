@@ -14,6 +14,7 @@ const {
   Collection,
   Delete,
   Ref,
+  Update,
 } = fql;
 
 type User = {
@@ -71,6 +72,27 @@ export const createUser = (
   Let(
     {
       data: Create(Collection('users'), {
+        data: {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      }),
+    },
+    normalizeUser('data')
+  );
+
+export const updateUser = (
+  id: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+): User =>
+  Let(
+    {
+      data: Update(Ref(Collection('users'), id), {
         data: {
           firstName,
           lastName,
