@@ -46,6 +46,14 @@ export const allUsers = (): Array<User> =>
     )
   );
 
+export const findUserById = (id: string): User =>
+  Let(
+    {
+      data: Get(Ref(Collection('users'), id)),
+    },
+    normalizeUser('data')
+  );
+
 export const findUserByEmail = (email: string): User =>
   Let(
     {

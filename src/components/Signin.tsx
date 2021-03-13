@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
+import { CURRENT_USER_QUERY } from './User';
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -20,6 +21,7 @@ const Signin = () => {
   });
   const [signin, { loading }] = useMutation(SIGNIN_MUTATION, {
     variables: inputs,
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
   return (
