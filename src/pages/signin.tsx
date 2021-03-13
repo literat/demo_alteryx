@@ -1,9 +1,9 @@
 import withApollo from '../components/withApollo';
-import SignInForm from '../components/SignInForm';
+import Signin from '../components/Signin';
 
 const SignIn = (): JSX.Element => (
   <section>
-    <SignInForm />
+    <Signin />
   </section>
 );
 

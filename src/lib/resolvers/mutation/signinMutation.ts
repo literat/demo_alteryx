@@ -1,4 +1,3 @@
-import { query as fql } from 'faunadb';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { findUserByEmail } from '../../fauna/queries/users';
@@ -11,12 +10,12 @@ export const signinMutation = async (parent, { email, password }, context) => {
     throw new Error(`No such user found for email ${email}`);
   }
   // 2. Check if their password is correct
-  const valid = await bcrypt.compare(password, user.data.password);
+  const valid = await bcrypt.compare(password, user.password);
   if (!valid) {
     throw new Error('Invalid Password!');
   }
   // 3. Generate the JWT Token
-  const token = jwt.sign({ userId: user.ref.id }, process.env.APP_SECRET);
+  const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
   // 4. Set the cookie with the token
   context.res.cookie('token', token, {
     httpOnly: true,
@@ -24,5 +23,5 @@ export const signinMutation = async (parent, { email, password }, context) => {
   });
 
   // 5. Return the user
-  return user.data;
+  return user;
 };

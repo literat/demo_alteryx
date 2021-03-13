@@ -16,7 +16,23 @@ const {
   Ref,
 } = fql;
 
-export const allUsers = () =>
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
+
+const normalizeUser = (docRef: string): User => ({
+  id: Select(['ref', 'id'], Var(docRef)),
+  firstName: Select(['data', 'firstName'], Var(docRef)),
+  lastName: Select(['data', 'lastName'], Var(docRef)),
+  email: Select(['data', 'email'], Var(docRef)),
+  password: Select(['data', 'password'], Var(docRef)),
+});
+
+export const allUsers = (): Array<User> =>
   Map(
     Paginate(Match(Index('all_users'))),
     Lambda(
@@ -25,43 +41,43 @@ export const allUsers = () =>
         {
           userDoc: Get(Var('userRef')),
         },
-        {
-          id: Select(['ref', 'id'], Var('userDoc')),
-          firstName: Select(['data', 'firstName'], Var('userDoc')),
-          lastName: Select(['data', 'lastName'], Var('userDoc')),
-          email: Select(['data', 'email'], Var('userDoc')),
-        }
+        normalizeUser('userDoc')
       )
     )
   );
 
-export const findUserByEmail = (email) =>
-  Get(Match(Index('user_by_email'), email));
+export const findUserByEmail = (email: string): User =>
+  Let(
+    {
+      data: Get(Match(Index('user_by_email'), email)),
+    },
+    normalizeUser('data')
+  );
 
 export const createUser = (
   firstName: string,
   lastName: string,
   email: string,
   password: string
-) =>
-  Create(Collection('users'), {
-    data: {
-      firstName,
-      lastName,
-      email,
-      password,
+): User =>
+  Let(
+    {
+      data: Create(Collection('users'), {
+        data: {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      }),
     },
-  });
+    normalizeUser('data')
+  );
 
-export const removeUser = (id: string) =>
+export const removeUser = (id: string): User =>
   Let(
     {
       data: Delete(Ref(Collection('users'), id)),
     },
-    {
-      id: Select(['ref', 'id'], Var('data')),
-      firstName: Select(['data', 'firstName'], Var('data')),
-      lastName: Select(['data', 'lastName'], Var('data')),
-      email: Select(['data', 'email'], Var('data')),
-    }
+    normalizeUser('data')
   );
