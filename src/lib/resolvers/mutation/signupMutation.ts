@@ -16,7 +16,7 @@ export const signupMutation = async (parent, args, context, info) => {
   );
 
   // create JWT token for them
-  const token = jwt.sign({ userId: user.ref.id }, process.env.APP_SECRET);
+  const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
   // Better approach is to store it in memory
   // https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
   // We set jwt as a cookie on the response
@@ -26,5 +26,5 @@ export const signupMutation = async (parent, args, context, info) => {
   });
 
   // Finallllly we return the user to the browser
-  return user.data;
+  return user;
 };
