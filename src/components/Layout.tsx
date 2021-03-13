@@ -12,7 +12,6 @@ const Layout = ({ children }: ILayoutProps): JSX.Element => (
     <Meta siteTitle="rimmer" />
     <Header />
     {children}
-    <Footer />
   </>
 );
 
