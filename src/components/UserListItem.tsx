@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { ALL_USERS_QUERY } from './Dashboard';
+import { User } from './User';
+import { ALL_USERS_QUERY } from './UserListing';
 
 const REMOVE_USER_MUTATION = gql`
   mutation REMOVE_USER_MUTATION($id: ID!) {
@@ -13,7 +14,11 @@ const REMOVE_USER_MUTATION = gql`
   }
 `;
 
-const UserListItem = ({ user }) => {
+interface UserListItemProps {
+  user: User;
+}
+
+const UserListItem = ({ user }: UserListItemProps): JSX.Element => {
   const [removeUser] = useMutation(REMOVE_USER_MUTATION, {
     variables: {
       id: user.id,

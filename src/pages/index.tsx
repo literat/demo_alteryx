@@ -1,4 +1,3 @@
-import withApollo from '../components/withApollo';
 import Dashboard from '../components/Dashboard';
 import PleaseSignIn from '../components/PleaseSignIn';
 

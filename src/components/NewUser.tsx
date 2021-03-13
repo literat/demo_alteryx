@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import UserForm from './UserForm';
 import useForm from '../lib/useForm';
-import { CURRENT_USER_QUERY } from './User';
+import { ALL_USERS_QUERY } from './UserListing';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -25,8 +25,8 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-const Signup = (): JSX.Element => {
-  const { inputs, handleChange } = useForm({
+const NewUser = (): JSX.Element => {
+  const { inputs, handleChange, resetForm } = useForm({
     firstName: '',
     lastName: '',
     email: '',
@@ -34,31 +34,26 @@ const Signup = (): JSX.Element => {
   });
   const [signup, { loading, data }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    refetchQueries: [{ query: ALL_USERS_QUERY }],
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup();
+    resetForm();
   };
 
   return (
-    <>
-      <h2>Sign Up for An Account</h2>
-      {data && data.signup && (
-        <p>Signed up with {data.signup.email} — Please Sign In now</p>
-      )}
-      <UserForm
-        onSubmit={handleSubmit}
-        onChange={handleChange}
-        buttonLabel="Sign Up!"
-        inputs={inputs}
-        data={data}
-        loading={loading}
-      />
-    </>
+    <UserForm
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      buttonLabel="Create user!"
+      inputs={inputs}
+      data={data}
+      loading={loading}
+    />
   );
 };
 
-export default Signup;
+export default NewUser;
 export { SIGNUP_MUTATION };
