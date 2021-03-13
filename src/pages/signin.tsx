@@ -1,4 +1,3 @@
-import withApollo from '../components/withApollo';
 import Signin from '../components/Signin';
 
 const SignIn = (): JSX.Element => (
@@ -7,4 +6,4 @@ const SignIn = (): JSX.Element => (
   </section>
 );
 
-export default withApollo(SignIn);
+export default SignIn;

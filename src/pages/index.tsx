@@ -10,4 +10,4 @@ const Home = (): JSX.Element => (
   </section>
 );
 
-export default withApollo(Home);
+export default Home;

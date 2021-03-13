@@ -1,8 +1,8 @@
-import Menu from './Menu';
+import Nav from './Nav';
 
 const Header = (): JSX.Element => (
   <header className="bar">
-    <Menu />
+    <Nav />
   </header>
 );
 
