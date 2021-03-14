@@ -1,0 +1,47 @@
+{
+  "rootDir": "../../",
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "automock": false,
+  "collectCoverageFrom": [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.next/**",
+    "!**/*.config.js",
+    "!**/coverage/**",
+    "!**/src/types/**"
+  ],
+  "verbose": false,
+  "setupFilesAfterEnv": ["./config/jest/setup.ts"],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
+  },
+  "testPathIgnorePatterns": [
+    ".next/",
+    "<rootDir>/node_modules/"
+  ],
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "reporters": [
+    "default",
+    [
+      "jest-junit", {
+        "suiteName": "jest tests",
+        "outputDirectory": "./coverage"
+      }
+    ]
+  ],
+  "testURL": "http://localhost/"
+}

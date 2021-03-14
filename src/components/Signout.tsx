@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import { Button } from '@material-ui/core';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_OUT_MUTATION = gql`
@@ -16,9 +17,9 @@ const Signout = (): JSX.Element => {
   });
 
   return (
-    <button type="button" onClick={() => signout()}>
+    <Button type="button" color="inherit" onClick={() => signout()}>
       Sign Out
-    </button>
+    </Button>
   );
 };
 
