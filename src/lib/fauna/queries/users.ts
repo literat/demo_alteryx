@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { query as fql } from 'faunadb';
 
 const {

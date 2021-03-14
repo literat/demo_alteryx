@@ -26,30 +26,28 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const NewUser = (): JSX.Element => {
-  const { inputs, handleChange, resetForm } = useForm({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-  const [signup, { loading, data }] = useMutation(SIGNUP_MUTATION, {
-    variables: inputs,
-    refetchQueries: [{ query: ALL_USERS_QUERY }],
-  });
+  const { resetForm } = useForm();
+  const [signup, { loading, data }] = useMutation(SIGNUP_MUTATION);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, inputs) => {
     e.preventDefault();
-    await signup();
+    await signup({
+      variables: inputs,
+      refetchQueries: [{ query: ALL_USERS_QUERY }],
+    });
     resetForm();
   };
 
   return (
     <UserForm
       onSubmit={handleSubmit}
-      onChange={handleChange}
       buttonLabel="Create user!"
-      inputs={inputs}
-      data={data}
+      initialUser={{
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      }}
       loading={loading}
     />
   );

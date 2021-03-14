@@ -42,6 +42,7 @@ const Signin = () => {
             type="email"
             name="email"
             placeholder="email"
+            // @ts-ignore
             value={inputs.email}
             onChange={handleChange}
             autoComplete="email"
@@ -53,6 +54,7 @@ const Signin = () => {
             type="password"
             name="password"
             placeholder="password"
+            // @ts-ignore
             value={inputs.password}
             onChange={handleChange}
             autoComplete="new-password"

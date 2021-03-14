@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { findUserById } from '../../fauna/queries/users';
 
 export const userQuery = async (parent, args, context) => {
