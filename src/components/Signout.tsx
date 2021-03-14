@@ -16,7 +16,7 @@ const Signout = (): JSX.Element => {
   });
 
   return (
-    <button type="button" onClick={signout}>
+    <button type="button" onClick={() => signout()}>
       Sign Out
     </button>
   );

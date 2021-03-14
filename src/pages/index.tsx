@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Dashboard from '../components/Dashboard';
 import PleaseSignIn from '../components/PleaseSignIn';
 

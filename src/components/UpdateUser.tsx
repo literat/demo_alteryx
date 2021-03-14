@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+// @ts-nocheck
 import UserForm from './UserForm';
 
 const SINGLE_USER_QUERY = gql`

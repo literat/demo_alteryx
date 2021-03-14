@@ -1,11 +1,15 @@
+import { FormEvent } from 'react';
 import useForm from '../lib/useForm';
-import { User } from './User';
+
+export type UserInputs = {
+  firstName: string, lastName: string, email: string, password: string
+};
 
 interface UserFormProps {
-  onSubmit: () => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>, inputs: UserInputs | {}) => void;
   buttonLabel: string;
   loading: boolean;
-  initialUser: User | null;
+  initialUser: UserInputs | null;
 }
 
 const UserForm = ({
@@ -19,7 +23,7 @@ const UserForm = ({
   );
 
   return (
-    <form method="post" onSubmit={(e) => onSubmit(e, inputs)}>
+    <form method="post" onSubmit={(e: FormEvent<HTMLFormElement>) => onSubmit(e, inputs)}>
       <fieldset disabled={loading} aria-busy={loading} data-testid="loading">
         <label htmlFor="firstName">
           First name
@@ -27,6 +31,7 @@ const UserForm = ({
             type="text"
             name="firstName"
             placeholder="First name"
+            // @ts-ignore
             value={inputs.firstName}
             onChange={handleChange}
             autoComplete="firstName"
@@ -38,6 +43,7 @@ const UserForm = ({
             type="text"
             name="lastName"
             placeholder="Last name"
+            // @ts-ignore
             value={inputs.lastName}
             onChange={handleChange}
             autoComplete="lastName"
@@ -49,6 +55,7 @@ const UserForm = ({
             type="email"
             name="email"
             placeholder="email"
+            // @ts-ignore
             value={inputs.email}
             onChange={handleChange}
             autoComplete="email"
@@ -60,6 +67,7 @@ const UserForm = ({
             type="password"
             name="password"
             placeholder="password"
+            // @ts-ignore
             value={inputs.password}
             onChange={handleChange}
             autoComplete="new-password"

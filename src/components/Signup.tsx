@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import UserForm from './UserForm';
-import useForm from '../lib/useForm';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGNUP_MUTATION = gql`
@@ -26,20 +25,14 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const Signup = (): JSX.Element => {
-  const { inputs, handleChange } = useForm({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
-  const [signup, { loading, data }] = useMutation(SIGNUP_MUTATION, {
-    variables: inputs,
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-  });
+  const [signup, { loading, data }] = useMutation(SIGNUP_MUTATION, );
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, inputs) => {
     e.preventDefault();
-    await signup();
+    await signup({
+      variables: inputs,
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
   };
 
   return (
@@ -50,10 +43,13 @@ const Signup = (): JSX.Element => {
       )}
       <UserForm
         onSubmit={handleSubmit}
-        onChange={handleChange}
         buttonLabel="Sign Up!"
-        inputs={inputs}
-        data={data}
+        initialUser={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+        }}
         loading={loading}
       />
     </>
